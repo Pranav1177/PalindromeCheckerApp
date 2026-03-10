@@ -11,7 +11,7 @@ public class PalindromeCheckerApp {
         System.out.print("\nEnter a string to check: ");
         String input = sc.nextLine();
 
-        if (UseCaseIPalindromeCheckerApp(input)) {
+        if (checkPalindromeLogic(input)) {
             System.out.println("Result: '" + input + "' is a palindrome!");
         } else {
             System.out.println("Result: '" + input + "' is NOT a palindrome.");
@@ -20,9 +20,41 @@ public class PalindromeCheckerApp {
         sc.close();
     }
 
-    public static boolean UseCaseIPalindromeCheckerApp(String str) {
+    public static boolean checkPalindromeLogic(String str) {
+        if (str == null || str.isEmpty()) return false;
 
-        return false;
+        String clean = str.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+
+        int left = 0;
+        int right = clean.length() - 1;
+
+        while (left < right) {
+            if (clean.charAt(left) != clean.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
         }
+        return true;
+    }
+    public static void stringReversal(String str) {
+            if (str == null || str.isEmpty()) {
+                System.out.println("Input is empty.");
+                return;
+            }
 
+            // Prepare the string (remove non-alphanumeric and lowercase)
+            String clean = str.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+            String reversed = "";
+
+            for (int i = clean.length() - 1; i >= 0; i--) {
+                reversed = reversed + clean.charAt(i);
+            }
+
+            if (clean.equals(reversed)) {
+                System.out.println("Result: '" + str + "' is a palindrome!");
+            } else {
+                System.out.println("Result: '" + str + "' is NOT a palindrome.");
+            }
+        }
     }
