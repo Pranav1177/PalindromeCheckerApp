@@ -11,7 +11,8 @@ public class PalindromeCheckerApp {
         System.out.print("\nEnter a string to check: ");
         String input = sc.nextLine();
 
-        if (UseCaseIPalindromeCheckerApp(input)) {
+        // Calling the logic method
+        if (checkPalindromeLogic(input)) {
             System.out.println("Result: '" + input + "' is a palindrome!");
         } else {
             System.out.println("Result: '" + input + "' is NOT a palindrome.");
@@ -20,9 +21,23 @@ public class PalindromeCheckerApp {
         sc.close();
     }
 
-    public static boolean UseCaseIPalindromeCheckerApp(String str) {
+    // Branch 2 Implementation: Two-pointer approach
+    public static boolean checkPalindromeLogic(String str) {
+        if (str == null || str.isEmpty()) return false;
 
-        return false;
+        // Clean the string (lowercase and remove non-alphanumeric if desired)
+        String clean = str.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+
+        int left = 0;
+        int right = clean.length() - 1;
+
+        while (left < right) {
+            if (clean.charAt(left) != clean.charAt(right)) {
+                return false; // Not a palindrome
+            }
+            left++;
+            right--;
         }
-
+        return true; // Is a palindrome
     }
+}
